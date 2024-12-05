@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <div th:replace="~{fragments/fragment::commonLinks}"></div>
+
+
+    <style>
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('https://jobstack-shreethemes.vercel.app/static/media/bg.9f5fc6c84f7a4eb68e0c.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(4, 120, 87, 0.9);
+        }
+
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .text-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .custom-section {
+            padding: 4rem 0;
+        }
+
+        .custom-title {
+            font-weight: bold;
+            color: #1ac079;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .custom-paragraph {
+            color: #6c757d;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #1ac079;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h5 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links h2,
+        .footer-icon h2,
+        .footer-contacts h2,
+        .footer-download h2 {
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .footer-links p,
+        .footer-icon p,
+        .footer-contacts p,
+        .footer-download p {
+            color: rgb(151, 156, 161);
+        }
+
+        .footer-links a:hover,
+        .footer-icon a:hover,
+        .footer-contacts a:hover,
+        .footer-download a:hover {
+            color: rgb(151, 156, 161);
+            text-decoration: underline;
+        }
+        .job-banner {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-banner h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .job-banner p {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .btn-apply {
+            background-color: #28a78c;
+            color: white;
+            border: none;
+        }
+
+        .btn-learn {
+            border: 1px solid #1cc98f;
+            
+            color: #1cc98f;
+            background-color: transparent;
+        }
+        .btn-apply:hover{
+          background-color:transparent;
+          border:1px solid #08c988;
+          color:#08c988;
+        }
+        
+        
+
+        /* Background Icon Styling */
+        .background-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+        }
+        .background-icon-left {
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Text and button container to appear above the background icon */
+        .content-container {
+            z-index: 2;
+            margin-left: 20px;
+        }
+        .text-container a:hover{
+            text-decoration: underline;
+        }
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            font-weight: 549;
+            margin: 0 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #1ac079; /* Change this color to your desired hover color */
+        }
+        .navbar {
+  border-radius: 20px; /* Adjust the value for your design */
+}
+.btn-custom {
+            color:#1ac079;
+          border-color: #1ac079;
+        }
+
+        .btn-custom:hover {
+            background-color: #1ac079;
+            color: white;
+        }
+
+        .btn1:hover {
+            color:#1ac079;
+            border-color: #1ac079;
+        }
+        .btn1{
+          background-color: #1ac079;
+          color: white;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/header::header}"></div>
+
+    <!-- Emerald Overlay Section -->
+    <div>
+        <div class="image-container">
+            <div class="overlay"></div>
+            <div class="text-container">
+                <h1>Welcome to Hire Tribe</h1>
+                <div class="breadcrumb ms-5">
+                    <a th:href="@{/}">Hire Tribe</a> &gt; Professional Services
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container custom-section">
+        <h2 class="custom-title">Empowering Your Job Search and Recruitment</h2>
+        <p class="custom-paragraph">
+            Discover the tools and resources you need to excel in your career journey. At Hire Tribe, we bring employers and job seekers together with innovative features and a user-centric design.
+        </p>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="feature-card" data-aos="flip-left">
+                    <i class="fas fa-briefcase feature-icon"></i>
+                    <h5>Seamless Job Applications</h5>
+                    <p>Submit applications effortlessly with our intuitive platform.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card"data-aos="flip-left">
+                    <i class="fas fa-search feature-icon"></i>
+                    <h5>Advanced Job Search</h5>
+                    <p>Filter jobs based on location, experience, and preferences.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card" data-aos="flip-left">
+                    <i class="fas fa-user-tie feature-icon"></i>
+                    <h5>Expert Guidance</h5>
+                    <p>Access career tips and resources tailored to your goals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Empowering Tech & Startups Section -->
+<div class="container-fluid p-5 " >
+    <div class="row align-items-center" style="text-align: justify;">
+        
+        <!-- Left Content (Text + Icons) -->
+        <div class="container ">
+            <h2 class="text-center text-success mb-4">Empowering Tech Companies & Startups</h2>
+            <p class="text-center text-muted mb-5">
+                At Hire Tribe, we empower startups and tech companies to build stellar teams and transform ideas into reality. 
+                Our platform bridges the gap between top-tier talent and ambitious organizations, helping you scale with confidence.
+            </p>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="d-flex bg-light p-4 shadow-sm rounded align-items-center" data-aos="fade-right">
+                        <div class="bg-white rounded-circle d-flex justify-content-center align-items-center me-3" 
+                             style="width: 60px; height: 60px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-rocket fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark">Startup-Ready Solutions</h5>
+                            <p class="text-muted mb-0">Affordable, scalable tools tailored for emerging businesses.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex bg-light p-4 shadow-sm rounded align-items-center" data-aos="fade-left">
+                        <div class="bg-white rounded-circle d-flex justify-content-center align-items-center me-3" 
+                             style="width: 60px; height: 60px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-code fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark">Tech Talent Hub</h5>
+                            <p class="text-muted mb-0">Access a curated pool of developers, designers, and engineers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex bg-light p-4 shadow-sm rounded align-items-center" data-aos="fade-right">
+                        <div class="bg-white rounded-circle d-flex justify-content-center align-items-center me-3" 
+                             style="width: 60px; height: 60px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-handshake fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark">Collaborative Networking</h5>
+                            <p class="text-muted mb-0">Build connections with industry leaders and investors.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex bg-light p-4 shadow-sm rounded align-items-center" data-aos="fade-left">
+                        <div class="bg-white rounded-circle d-flex justify-content-center align-items-center me-3" 
+                             style="width: 60px; height: 60px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-chart-line fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-dark">Growth Analytics</h5>
+                            <p class="text-muted mb-0">Leverage data-driven insights to hire smarter and faster.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!-- Call to Action Button -->
+        </div>
+        </div>
+        <div class="container  mb-5">
+            <div class="job-banner d-flex align-items-center row">
+                <div class="col-9">
+                  <svg class="background-icon-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M21 8V7l-7-5-7 5v1h14zM21 10H3v9h18v-9zm-2 7H5v-7h14v7z"/>
+                </svg>
+        
+        
+                <div>
+                    <h2>Explore a job now!</h2>
+                    <p>Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000+ companies worldwide.</p>
+                </div>
+                </div>
+                <div class="col-3">
+                  <div class="ms-auto d-flex text-center ">
+                    <button class="btn btn-apply me-2">Apply Now</button>
+                    <button class="btn btn-learn ms-2">Learn More</button>
+                </div>
+                <!-- SVG Icon as Background -->
+                <svg class="background-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 17.25V21h3.75l11.09-11.09-3.75-3.75L3 17.25zm2.92-2.92l7.59-7.59 3.75 3.75-7.59 7.59h-3.75v-3.75z"/>
+                </svg>
+    
+                </div>
+    
+               
+              </div>
+        </div>
+    
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer::footer}"></div>
+    <div th:replace="~{fragments/fragment::commonJS}"></div>
+</body>
+</html>

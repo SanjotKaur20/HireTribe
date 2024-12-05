@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Templates</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .template-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .template-wrapper img {
+            transition: opacity 0.3s ease-in-out;
+            width: 20%;
+            height: auto;
+        }
+
+        .template-wrapper:hover img {
+            opacity: 0.7;
+        }
+
+        .overlay-icons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .template-wrapper:hover .overlay-icons {
+            opacity: 1;
+        }
+
+        .overlay-icons i {
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="form-section text-center">
+            <h2 class="section-title mb-4">Select Templates</h2>
+
+            <!-- Resume Template 1 -->
+            <div class="template-wrapper">
+                <img th:src="@{/image/Resume1.jpg}" alt="Template 1">
+                <div class="overlay-icons">
+                    <i class="fas fa-eye" onclick="previewTemplate('/image/Resume1.jpg')"></i>
+                    <i class="fas fa-download" onclick="chooseTemplate(1)"></i>
+                </div>
+            </div>
+
+            <!-- Resume Template 2 -->
+            <div class="template-wrapper">
+                <img th:src="@{/image/Resume2.jpg}" alt="Template 2">
+                <div class="overlay-icons">
+                    <i class="fas fa-eye" onclick="previewTemplate('/image/Resume2.jpg')"></i>
+                    <i class="fas fa-download" onclick="chooseTemplate(2)"></i>
+                </div>
+            </div>
+
+            <!-- Resume Template 3 -->
+            <div class="template-wrapper">
+                <img th:src="@{/image/Resume3.jpg}" alt="Template 3">
+                <div class="overlay-icons">
+                    <i class="fas fa-eye" onclick="previewTemplate('/image/Resume3.jpg')"></i>
+                    <i class="fas fa-download" onclick="chooseTemplate(3)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Function to Preview Template
+        function previewTemplate(imageUrl) {
+            const previewWindow = window.open("", "_blank");
+            previewWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Template Preview</title>
+                    </head>
+                    <body style="margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f8f9fa;">
+                        <img src="${imageUrl}" style="max-width: 100%; max-height: 100%;">
+                    </body>
+                </html>
+            `);
+        }
+
+        // Function to Choose and Download Template
+        function chooseTemplate(templateId) {
+            const formData = new FormData();
+            formData.append("templateId", templateId);
+
+            fetch("/generate-resume", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.blob();
+                    } else {
+                        throw new Error("Failed to generate resume");
+                    }
+                })
+                .then((blob) => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `resume-${templateId}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

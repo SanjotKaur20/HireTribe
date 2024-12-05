@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        background-color: #f1faf8;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .job-details-header {
+            background-color: #f2f5f5; /* Sky blue */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .card {
+            background-color: white;
+            box-shadow: 1px 2px 3px rgb(72, 73, 73) ;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .job-info {
+            padding: 20px;
+        }
+        .job-info h4 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .job-info p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        .job-details-body {
+            padding: 20px;
+        }
+        .label-icon {
+            display: inline-flex;
+            align-items: center;
+        }
+        .label-icon i {
+            margin-right: 5px;
+        }
+        
+        .job-description {
+            background-color: #F1F8FF; /* Very light blue */
+            border-radius: 10px;
+            padding: 7px;
+            margin-top: 15px;
+        }
+        .job-footer {
+            background-color: #65c0b8; /* Sky blue */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+        }
+        .job-info-separate {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .navbar-nav .nav-link {
+            color: rgb(130, 131, 133);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: black;
+            /* text-decoration: underline; */
+        }
+
+        
+        .view-job-btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .sidebar {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 20px;
+            height: 650px;
+        }
+
+        .navbar-nav{
+            margin-left: 45%;
+
+        }
+        .navbar{
+            border-radius: 13px;
+        }
+        .navbar-nav {
+    flex-wrap: nowrap;
+}
+/* #overflowTest {
+  overflow-y: scroll;
+  height: 900px;
+} */
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #65F7B9; /* Border color */
+    background-color: #fff; /* Background color */
+    transition: background-color 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: #65F7B9; /* Checked background color */
+    border-color: #65F7B9; /* Checked border color */
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 3px #65F7B9; /* Focus outline */
+}
+
+
+</style>
+
+</head>
+
+
+<body th:object="${jobDetails}"  style="overflow: hidden;">
+    
+
+<div class=" row">
+    <div class="col-md-3 sidebar bg-dark text-light">
+        <div class="account-settings">
+            <div class="user-profile text-center">
+                <div class="user-avatar rounded-circle">
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/7077/7077313.png}"
+                    height="90px" width="90px"      alt="Profile Image" class="profile-img" th:if="${user.photosImagePath==null}">
+                    <img class="profile-picture rounded-circle me-3 mb-3" height="90px"
+                    width="90px" th:if="${user.photosImagePath!=null}" th:src="@{${user?.photosImagePath}}" />
+                </div>
+                <h5 class="user-name mt-3" th:if="${user.firstName!=null && user.lastName!=null}"
+                    th:text="${user.firstName+' '+user.lastName}" style="color: #65F7B9;">Yuki Maxwell</h5>
+                    <h6 class="user-email text-center" th:text="${user?.userId?.email}" style="color: #65F7B9;">yuki@Maxwell.com</h6>
+                </div>
+            
+        </div>
+        <div sec:authorize="hasAuthority('Job Seeker')">
+        <h5 class="text-uppercase   font-weight-bold mb-3" style="color: #65F7B9;">Filter Results</h5>
+        <hr />
+        <form id="myForm" th:action="@{/dashboard/}">
+            <!-- Employment Type Filters -->
+            <div>
+                <h6 style="color: #65F7B9">Employment Type</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:checked="${partTime}" id="Part-time"
+                        name="partTime" th:value="Part-Time" />
+                    <label class="form-check-label" for="Part-time">Part-Time</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="full-time" th:checked="${fullTime}"
+                        name="fullTime" th:value="Full-Time" />
+                    <label class="form-check-label" for="full-time">Full-Time</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="freelance" th:checked="${freelance}"
+                        name="freelance" th:value="Freelance" />
+                    <label class="form-check-label" for="freelance">Freelance</label>
+                </div>
+            </div>
+            <hr />
+            <!-- Remote Options Filters -->
+            <div>
+                <h6 style="color:#65F7B9;">Remote</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="remote-only" th:value="Remote-Only"
+                        name="remoteOnly" th:checked="${remoteOnly}" />
+                    <label class="form-check-label" for="remote-only">Remote-Only</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="Office-Only" th:value="Office-Only"
+                        name="officeOnly" th:checked="${officeOnly}" />
+                    <label class="form-check-label" for="Office-Only">Office-Only</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="partial-remote"
+                        th:value="Partial-Remote" name="partialRemote" th:checked="${partialRemote}" />
+                    <label class="form-check-label" for="partial-remote">Partial-Remote</label>
+                </div>
+            </div>
+            <hr />
+            <!-- Date Posted Filters -->
+            <div>
+                <h6 style="color: #65F7B9;">Date Posted</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="today" name="today"
+                        th:checked="${today}" />
+                    <label class="form-check-label" for="today">Today</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="7days" name="days7"
+                        th:checked="${days7}" />
+                    <label class="form-check-label" for="7days">Last 7 Days</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="30days" name="days30"
+                        th:checked="${days30}" />
+                    <label class="form-check-label" for="30days">Last 30 Days</label>
+                </div>
+            </div>
+            <input id="hidJob" name="job" th:value="${job}" hidden />
+            <input id="hidLoc" name="location" th:value="${location}" hidden />
+        </form>
+        </div>
+            <!-- sidebar-profile.html -->
+            <div sec:authorize="hasAuthority('Recruiter')" class="mt-3">
+                <i class="fa-solid fa-earth-americas fs-4 me-3 ms-2 mb-3"></i>
+                <p>
+                    <span style="color:#65F7B9; margin-right: 3px;">Country: </span>
+                    <span th:text="${country != null ? country : 'Your Country'}"></span>
+                </p>
+                <hr />
+            
+                <i class="fa-solid fa-location-dot fs-4 me-3 ms-2 mb-3"></i>
+                <p>
+                    <span style="color:#65F7B9; margin-right: 3px;">State:</span>
+                    <span th:text="${state != null ? state : 'Your State'}"></span>
+                </p>
+                <hr />
+            
+                <i class="fa-solid fa-city fs-4 me-2 ms-2 mb-3"></i>
+                <p>
+                    <span style="color:#65F7B9; margin-right: 3px;">City:</span>
+                    <span th:text="${city != null ? city : 'Your City'}"></span>
+                </p>
+                <hr />
+            
+                <i class="fa-regular fs-4 fa-building ms-2 me-4 mb-3"></i>
+                <p>
+                    <span style="color:#65F7B9; margin-right: 3px;">Company Name:</span>
+                    <span th:text="${companyName != null ? companyName : 'Your Company'}"></span>
+                </p>
+                <hr />
+            </div>
+         
+
+        
+    </div>
+
+<div class="col-9 p-5">
+    <div th:replace="~{fragments/header1::header1}"></div>
+    <div class="row mt-4 mb-4" sec:authorize="hasAuthority('Job Seeker')">
+        <div class="col-md-5">
+            <input id="job" class="form-control" type="text" placeholder="Search for a job" name="job"
+                th:value="${job}" />
+        </div>
+        <div class="col-md-5">
+            <input id="loc" class="form-control" type="text" placeholder="Job Location" name="location"
+                th:value="${location}" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn  w-100" style="background-color: #65F7B9;" type="submit" form="myForm"><i class="fa fa-search"></i>
+                Search</button>
+        </div>
+    </div>
+
+        
+    <div class="container mt-3 p-4" style="overflow-y: auto; max-height: 400px;">
+
+    <!-- Job Details Section -->
+        <div class="card mt-1 p-5">
+            <a th:href="@{/dashboard/}" class="text-secondary">&larr; Back to Search Results</a>
+
+            <h1 class="mb-3 mt-3">Job Details</h1>
+
+            <!-- Job Title and Location -->
+            <h4 class="mb-1" th:text="${jobDetails.jobTitle}">Project Manager</h4>
+            <label class="text-muted" th:text="${jobDetails.jobLocationId.city + ', ' + jobDetails.jobLocationId.state}">
+                Brampton, Ontario</label>
+            <label class="text-muted">Company: <span th:text="${jobDetails.jobCompanyId.name}">ABC</span></label>
+        </div>
+        <div class="card mt-3 p-4">
+
+        <!-- Job Specifications -->
+        <div class="container ">
+            <h3 >Job Specs</h3>
+			<input  name="id" th:value="${jobDetails.jobPostId}"  hidden/>
+
+            <div class="row  border  rounded p-2 m-3">
+                <div class="col-md-3  ">
+                    <label>Date Posted: <span class="fw-bold" th:text="${jobDetails.postedDate}">2024-10-23</span></label>
+                </div>
+                <div class="col-md-3 ">
+                    <label>Salary: <span class="fw-bold" th:text="${jobDetails.salary}">$20,000</span></label>
+                </div>
+                <div class="col-md-3">
+                    <label>Type: <span class="fw-bold" th:text="${jobDetails.jobType}">Part-time</span></label>
+                </div>
+                <div class="col-md-3">
+                    <label>Remote: <span class="fw-bold" th:text="${jobDetails.remote}">Remote-Only</span></label>
+                </div>
+            </div>
+
+            <!-- Job Description -->
+             <div class=" row">
+                <div class="col-9">
+                    <h3 class="mt-4">Job Description</h3>
+                    <p th:utext="${jobDetails.descriptionOfJob}">Something something...</p>
+                    
+                </div>
+                <div class="col-3 mt-5  bg-dark text-light text-center " style="border-radius: 20px;" sec:authorize="hasAuthority('Recruiter')">
+                    <label class="mt-3 mb-3"> Candidates Applied for Job</label>
+                    <!-- <th:block th:each="applyList:${applyList}">
+                        <a style="text-decoration: none; color: white;" th:href="@{/job-seeker-profile/{id}(id=${applyList.userId.userAccountId})}" class="white" 
+                        th:text="${applyList.userId.firstName+' '+applyList.userId.lastName}" >First Name  LastName</a>
+                        <br>
+                    </th:block> -->
+                    <a th:href="@{/job-applied-seekers/{jobId}(jobId=${jobDetails.jobPostId})}" class="btn  mb-3" style="background-color: #1ac079;"> Applied  Job Seeker</a>
+
+                </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-start">
+                <form th:action="@{/dashboard/edit/{id}(id=${jobDetails.jobPostId})}" method="post"  >
+                    <button class="btn  me-2" style="background-color: #1ac079; color: white;" type="submit" sec:authorize="hasAuthority('Recruiter')">Edit Job</button>
+                </form>
+                <form th:action="@{/dashboard/deleteJob/{id}(id=${jobDetails.jobPostId})}" method="post">
+                    <button class="btn btn-danger me-2" type="submit" sec:authorize="hasAuthority('Recruiter')">Delete Job</button>
+                </form>
+                <form th:action="@{/job-details/apply/{id}(id=${jobDetails.jobPostId})}" th:object="${applyJob}" method="post" onsubmit="disableButton(this)">
+                    <button class="btn btn-danger me-2" type="submit" th:if="${alreadyApplied==false}" sec:authorize="hasAuthority('Job Seeker')">Apply</button>
+                    <button class="btn btn-danger me-2"  disabled th:if="${alreadyApplied==true}">Already Applied</button>
+                </form>
+                <form th:action="@{/job-details/save/{id}(id=${jobDetails.jobPostId})}" th:object="${applyJob}" method="post">
+                    <button class="btn btn-success me-2" type="submit" th:if="${alreadySaved==false}" sec:authorize="hasAuthority('Job Seeker')">Save Job</button>
+                    <button class="btn btn-success me-2"  disabled th:if="${alreadySaved==true}">Already Saved</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function disableButton(form){
+            const submitButton = form.querySelector('button[type="submit"]');
+            if(submitButton){
+                submitButton.disabled=true;
+            }
+        }
+    </script>
+    
+    
+</body>
+
+</html>

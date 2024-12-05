@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: white;
+    }
+    .container-title {
+      color: #1ac079;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .company-item {
+      background-color: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 15px 15px 30px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .company-item:hover {
+      transform: translateY(-5px);
+    }
+    .company-logo-wrapper {
+      position: absolute;
+      top: -25px;
+      left: 20%;
+      transform: translateX(-50%);
+      background-color: white;
+      border-radius: 20%;
+      height: 60px;
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .company-logo {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+    }
+    .company-content {
+      margin-top: 40px;
+    }
+    .company-title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: black;
+      margin: 10px 0;
+    }
+    .company-description {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 10px 0;
+    }
+    .career-link {
+      text-decoration: none;
+      color: #1ac079;
+    }
+    .image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('https://jobstack-shreethemes.vercel.app/static/media/bg.9f5fc6c84f7a4eb68e0c.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(4, 120, 87, 0.9); /* Semi-transparent emerald */
+        }
+
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .text-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8); /* Slightly lighter white */
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        .text-container a:hover{
+            text-decoration: underline;
+        }
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            font-weight: 530;
+            margin: 0 10px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #1ac079; /* Change this color to your desired hover color */
+        }
+        .navbar {
+  border-radius: 20px; /* Adjust the value for your design */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+        .form-control-search {
+            border-radius: 50px;
+            padding-left: 15px;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+        }
+        .profile-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-left: 15px;
+        }
+        
+.btn-custom {
+            color:#1ac079;
+          border-color: #1ac079;
+        }
+
+        .btn-custom:hover {
+            background-color: #1ac079;
+            color: white;
+        }
+
+        .btn1:hover {
+            color:#1ac079;
+            border-color: #1ac079;
+        }
+        .btn1{
+          background-color: #1ac079;
+          color: white;
+        }
+        .footer-links h2,
+.footer-icon h2,
+.footer-contacts h2,.footer-download h2 {
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.footer-links p,
+.footer-icon p,
+.footer-contacts p,
+.footer-download p {
+    color:  rgb(151, 156, 161);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+.footer-links a:hover,
+.footer-icon a:hover,
+.footer-contacts a:hover,
+.footer-download a:hover {
+       color:  rgb(151, 156, 161);
+    ; /* Change to your desired hover color */
+    text-decoration: underline; /* Optional for an underline effect */
+}
+
+        
+
+  </style>
+</head>
+<body>
+  <div th:replace="~{fragments/header::header}"></div>
+
+  <div>
+      <div class="image-container">
+          <div class="overlay"></div>
+          <div class="text-container">
+              <h1>Companies</h1>
+              <div class="breadcrumb">
+                  <a th:href="@{/}">Hire Tribe</a> &gt; Companies
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="container py-5">
+    <h1 class="container-title">Explore Our Partner Companies</h1>
+    <div class="row g-4">
+      <!-- Company 1 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item" >
+          <div class="company-logo-wrapper">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1200px-2021_Facebook_icon.svg.png" alt="Company Logo 1" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Facebook</h2>
+            <p class="company-description">
+              It enables people to share updates, photos, and videos, fostering online networking. Meta has expanded by acquiring Instagram, WhatsApp, and Oculus, making it a key player in digital communication and the metaverse.
+            </p>
+            <hr />
+            <a href="https://www.metacareers.com/jobs/?is_leadership=0&sub_teams[0]=Artificial%20Intelligence&is_in_page=0" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 2 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Company Logo 2" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Google</h2>
+            <p class="company-description">
+              Google is a global technology company known for its search engine, cloud services, and digital advertising. It also develops products like Android, YouTube, and Google Workspace, driving innovation across various tech sectors.
+            </p>
+            <hr />
+            <a href="https://careersonair.withgoogle.com/" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 3 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1745px-Android_robot.svg.png" alt="Company Logo 3" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Android</h2>
+            <p class="company-description">
+              Android is an open-source mobile operating system developed by Google, powering a wide range of smartphones and tablets. It offers a customizable user interface and supports a vast ecosystem of apps through the Google Play Store.
+            </p>
+            <hr />
+            <a href="https://developer.android.com/studio" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 4 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://wallpapers.com/images/hd/lenovo-logo-red-circle-lzy3spbdak4fcvus-2.jpg" alt="Company Logo 4" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Lenovo</h2>
+            <p class="company-description">
+              Lenovo is a global technology company known for its innovative laptops, desktops, and smart devices, catering to both consumers and businesses worldwide. It focuses on delivering cutting-edge solutions for a connected world.
+            </p>
+            <hr />
+            <a href="https://jobs.lenovo.com/en_US/careers/EarlyCareer" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+        <div class="row g-4 mt-3">
+      <!-- Company 1 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png" alt="Company Logo 1" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Spotify</h2>
+            <p class="company-description">
+Spotify is a leading music streaming platform offering millions of songs, podcasts, and personalized playlists, connecting users with audio content worldwide.
+            </p>
+            <hr />
+            <a href="https://open.spotify.com/" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 2 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Company Logo 2" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">LinkedIn</h2>
+            <p class="company-description">
+LinkedIn is a professional networking platform where users connect, share resumes, and explore job opportunities, making it a hub for career growth and recruitment.            </p>
+            <hr />
+            <a href="https://business.linkedin.com/en-in/talent-solutions/company-career-pages" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 3 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://a.slack-edge.com/80588/img/plugins/circleci/service_512.png" alt="Company Logo 3" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Circle CI</h2>
+            <p class="company-description">
+CircleCI is a leading CI/CD platform that automates software development workflows, enabling teams to build, test, and deploy faster with improved efficiency.
+            </p>
+            <hr />
+            <a href="https://circleci.com/careers/" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 4 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://logos-world.net/wp-content/uploads/2020/09/Skype-Logo.png" alt="Company Logo 4" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Lenovo</h2>
+            <p class="company-description">
+Skype is a communication platform offering video calls, voice calls, and messaging, widely used for personal and professional networking globally.
+            </p>
+            <hr />
+            <a href="https://www.skype.com/en/work-from-home/" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+            <div class="row g-4 mt-3">
+      <!-- Company 1 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://img.freepik.com/premium-vector/snapchat-logo-icon-messaging-app-symbol_628407-1928.jpg" alt="Company Logo 1" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Snapchat</h2>
+            <p class="company-description">
+Snapchat is a multimedia messaging app that allows users to share photos, videos, and messages that disappear after being viewed, focusing on creative  communication.
+            </p>
+            <hr />
+            <a href="https://careers.snap.com/" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 2 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://cdn.icon-icons.com/icons2/2631/PNG/512/gmail_new_logo_icon_159149.png" alt="Company Logo 2" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Gmail</h2>
+            <p class="company-description">
+Gmail is Google's free email service, offering fast, secure communication with features like spam filtering, 15GB storage, and seamless integration with other Google tools.            
+<hr />
+            <a href="https://support.google.com/googlecareers/?hl=en#topic=6095159" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 3 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRku8_NMJHPR56xur3VJWN1MA1FbFE9p3wj_g&s" alt="Company Logo 3" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">Telegram</h2>
+            <p class="company-description">
+Telegram is a cloud-based messaging platform offering secure chats, file sharing, and large group communication, popular for its speed and privacy features.
+            </p>
+            <hr />
+            <a href="https://telegram.org/jobs" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company 4 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="company-item">
+          <div class="company-logo-wrapper">
+            <img src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-01-512.png" alt="Company Logo 4" class="company-logo">
+          </div>
+          <div class="company-content">
+            <h2 class="company-title">WhatsApp</h2>
+            <p class="company-description">
+WhatsApp is a messaging app , enabling users to send texts, voice messages, make calls globally.  It’s widely used for personal and business communication.
+            </p>
+            <hr />
+            <a href="https://www.metacareers.com/areas-of-work/whatsapp/?p[divisions][0]=WhatsApp&divisions[0]=WhatsApp" target="_blank" class="career-link">Read More &rarr;</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+  </div>
+  <div th:replace="~{fragments/footer::footer}"></div>
+<div th:replace="~{fragments/fragment::commonJS}"></div>
+
+</body>
+</html>

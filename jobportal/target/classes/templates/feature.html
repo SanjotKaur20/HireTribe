@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div th:replace="~{fragments/fragment::commonLinks}"></div>
+
+    <title>Hire Tribe - Portal Features</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        /* Hero Section Styles */
+        /* Section Title */
+        .section-title {
+            font-weight: bold;
+            color: #1ac079;
+        }
+
+        /* Steps Section */
+        .step-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1ac079;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .step-desc {
+            font-size: 1rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Component Card Styles */
+        .component-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .icon-box {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e8faf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1ac079;
+            margin-bottom: 15px;
+        }
+
+        .component-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .component-desc {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .btn-demo {
+            background-color: #1ac079;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+
+        .btn-demo:hover {
+            background-color: #157a56;
+        }
+
+        /* Image & Paragraph Section */
+        .image-section img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .description-text {
+            font-size: 1rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('https://jobstack-shreethemes.vercel.app/static/media/bg.9f5fc6c84f7a4eb68e0c.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(4, 120, 87, 0.9); /* Semi-transparent emerald */
+        }
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .text-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8); /* Slightly lighter white */
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #1ac079; /* Change this color to your desired hover color */
+        }
+        .form-control-search {
+            border-radius: 50px;
+            padding-left: 15px;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+        }
+        .profile-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-left: 15px;
+        }
+        .navbar {
+  border-radius: 20px; /* Adjust the value for your design */
+}
+.btn-custom {
+            color:#1ac079;
+          border-color: #1ac079;
+        }
+
+        .btn-custom:hover {
+            background-color: #1ac079;
+            color: white;
+        }
+
+        .btn1:hover {
+            color:#1ac079;
+            border-color: #1ac079;
+        }
+        .btn1{
+          background-color: #1ac079;
+          color: white;
+        }
+        .text-container a:hover{
+            text-decoration: underline;
+        }
+        .footer-links h2,
+.footer-icon h2,
+.footer-contacts h2,.footer-download h2 {
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.footer-links p,
+.footer-icon p,
+.footer-contacts p,
+.footer-download p {
+    color:  rgb(151, 156, 161);
+    
+}
+.footer-links a:hover,
+.footer-icon a:hover,
+.footer-contacts a:hover,
+.footer-download a:hover {
+       color:  rgb(151, 156, 161);
+     /* Change to your desired hover color */
+    text-decoration: underline; /* Optional for an underline effect */
+}
+
+        
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="~{fragments/header::header}"></div>
+
+    <!-- Hero Section -->
+    <div class="image-container">
+        <div class="overlay"></div>
+        <div class="text-container">
+            <h1>Job Portal Features</h1>
+            <div class="breadcrumb ms-4">
+                <a th:href="@{/}">Hire Tribe</a> &gt; Job Portal Features
+            </div>
+        </div>
+    </div>
+
+    <!-- Steps to Find a Job Section -->
+    <div class="container m-5">
+        <h2 class="text-center section-title mb-4">Steps to Find a Job on Hire Tribe</h2>
+        <div class="row">
+            <!-- Step 1 -->
+            <div class="col-md-4" >
+                <div class="step-box"data-aos="flip-left" >
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">Create Your Profile</h4>
+                    <p class="step-desc">Start by creating a complete and detailed profile. Add your personal details, skills, experience, and upload a professional resume.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="col-md-4">
+                <div class="step-box"  data-aos="flip-left" >
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">Search for Jobs</h4>
+                    <p class="step-desc">Use our advanced search filters to find the perfect job for you. You can search by location, job type, company, and many other criteria. The right job is just a search away.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="col-md-4">
+                <div class="step-box"data-aos="flip-left" >
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">Apply for Jobs</h4>
+                    <p class="step-desc">Once you find a job that suits you, click 'Apply Now'. You can send your resume and cover letter directly through the portal and track your application status.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="col-md-4" data-aos="flip-left">
+                <div class="step-box">
+                    <div class="step-number">4</div>
+                    <h4 class="step-title">Prepare for Interviews</h4>
+                    <p class="step-desc">If your application is shortlisted, you’ll be invited for an interview. Get ready with tips, and use the portal’s resources to prepare and impress your future employer.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="col-md-4" data-aos="flip-left">
+                <div class="step-box">
+                    <div class="step-number">5</div>
+                    <h4 class="step-title">Accept the Job Offer</h4>
+                    <p class="step-desc">Once you receive an offer, you can review the terms and accept the job directly through the portal. Congratulations on your new role!</p>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="col-md-4" data-aos="flip-left">
+                <div class="step-box">
+                    <div class="step-number">6</div>
+                    <h4 class="step-title">Stay Connected</h4>
+                    <p class="step-desc">After accepting the offer, stay connected with the recruiter and the company via Hire Tribe for all future updates and professional networking opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Get a Job Using Hire Tribe Section -->
+    <div class="container my-5">
+        <h2 class="text-center section-title mb-4">How to Get a Job Using Hire Tribe</h2>
+        <div class="row">
+            <!-- Left Column: Paragraph Description -->
+            <div class="col-md-6">
+                <p class="description-text" >
+                    <strong >Welcome to Hire Tribe!</strong> Your journey to landing your dream job starts here, with a platform that’s designed to help you every step of the way. Whether you're just starting your career or looking for a new opportunity, Hire Tribe is the perfect place to take your job search to the next level.
+            
+                    <br><br>
+                    <strong>Step 1: Create a Standout Profile</strong><br>
+                    Begin by creating a detailed, professional profile that showcases your <em>skills, experience, and unique strengths</em>. Upload your resume, add a professional photo, and include a compelling summary to stand out to recruiters. A complete profile increases your visibility and makes you a strong candidate.
+            
+                    <br><br>
+                    <strong>Step 2: Discover Your Perfect Job</strong><br>
+                    With Hire Tribe’s advanced search features, finding the right job has never been easier. Search by job title, location, industry, and more to find roles that perfectly match your qualifications. Filter for full-time, part-time, remote, or freelance positions depending on your needs and preferences.
+            
+                    <br><br>
+                    <strong>Step 3: Apply with Ease</strong><br>
+                    Once you find a job that fits, simply click ‘Apply Now’ and submit your resume directly through the portal. You can track your applications and receive notifications about updates, interview invitations, or status changes. It’s a simple, straightforward process designed to save you time and effort.
+            
+                    <br><br>
+                    <strong>Step 4: Get Interview Ready</strong><br>
+                    When you’re shortlisted, Hire Tribe provides you with interview preparation resources. From common interview questions to tips on how to make a lasting impression, we’ve got everything you need to feel confident and ready to ace your interview.
+            
+                    <br><br>
+                    <strong>Step 5: Accept Your Offer and Get Started</strong><br>
+                    Once you receive a job offer, review the details and accept it directly through Hire Tribe. You’ll be able to connect with your new employer and stay updated with any future requirements or next steps.
+            
+                    <br><br>
+                    <strong>Start your job search today</strong> and connect with amazing opportunities through Hire Tribe—where your dream job is just a click away. Whether you're looking for a career change, your first job, or something flexible, Hire Tribe is here to help you succeed!
+                </p>
+            </div>
+            
+            <!-- Right Column: Image -->
+            <div class="col-md-6 image-section">
+                <img th:src="@{/image/job_portal_about.png}" data-aos="zoom-in-up" alt="How to Find a Job" />
+                <img th:src="@{/image/feature.png}" data-aos="zoom-in-up" class="mt-3" alt="How to Find a Job" />
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer::footer}"></div>
+      <div th:replace="~{fragments/fragment::commonJS}"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

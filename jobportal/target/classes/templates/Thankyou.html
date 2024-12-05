@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background */
+            font-family: 'Arial', sans-serif;
+        }
+        .status-container {
+            text-align: center;
+            margin: auto;
+            max-width: 600px;
+            padding: 40px;
+        }
+        .status-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background-color: #eafaf1; /* Light green */
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .status-icon {
+            font-size: 3rem;
+            color: #1ac079; /* Green for success */
+        }
+        .status-message {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #212529;
+        }
+        .status-description {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        .btn-back {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #eafaf1; /* Light green */
+            border: none;
+            color: #1ac079;
+            border-radius: 30px;
+            text-decoration: none;
+            border: 3px solid #1ac079; /* Adding border with the desired color */
+        }
+        .btn-back:hover {
+            background-color: #11c275;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="status-container">
+        <!-- Check if there is a success message -->
+        <div th:if="${success}" class="alert alert-success">
+            <div class="status-icon-wrapper">
+                <i class="fas fa-thumbs-up status-icon"></i>
+            </div>
+            <h1 class="status-message">Thank You!</h1>
+            <p th:text="${success}" class="status-description"></p>
+        </div>
+
+        <!-- Check if there is an error message -->
+        <div th:if="${error}" class="alert alert-danger">
+            <div class="status-icon-wrapper">
+                <i class="fas fa-exclamation-circle status-icon" style="color: #e74c3c;"></i>
+            </div>
+            <h1 class="status-message">Oops!</h1>
+            <p th:text="${error}" class="status-description"></p>
+        </div>
+
+        <!-- Common Status Description -->
+        <p class="status-description">
+            Hire Tribe is a dedicated platform connecting talented job seekers with top recruiters, 
+            making hiring and job searching seamless and efficient!
+        </p>
+
+        <!-- Back to Home Button -->
+        <a th:href="@{/}" class="btn-back">Back to Home</a>
+    </div>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

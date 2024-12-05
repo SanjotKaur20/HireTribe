@@ -1,0 +1,35 @@
+/* footer */
+
+.footer-links h2,
+.footer-icon h2,
+.footer-contacts h2,.footer-download h2 {
+    color: white;
+    font-family: serif;
+}
+
+.footer-links p,
+.footer-icon p,
+.footer-contacts p,
+.footer-download p {
+    color:  rgb(151, 156, 161);
+    
+}
+.footer-links a:hover,
+.footer-icon a:hover,
+.footer-contacts a:hover,
+.footer-download a:hover {
+       color:  rgb(151, 156, 161);
+    ; /* Change to your desired hover color */
+    text-decoration: underline; /* Optional for an underline effect */
+}
+
+/* header */
+
+
+
+
+
+        
+/*Login Page*/
+
+  

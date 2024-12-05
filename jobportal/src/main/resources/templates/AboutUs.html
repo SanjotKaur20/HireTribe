@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+  <!-- Font Awesome for Icons -->
+  <div th:replace="~{fragments/fragment::commonLinks}"></div>
+  <link th:href="@{https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css}" rel="stylesheet" />
+
+
+
+    <style>
+      body{
+         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+      }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('https://jobstack-shreethemes.vercel.app/static/media/bg.9f5fc6c84f7a4eb68e0c.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(4, 120, 87, 0.9); /* Semi-transparent emerald */
+        }
+
+        .text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .text-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8); /* Slightly lighter white */
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        .features-list i {
+      color: #1ac079;
+      /* Customize color */
+      margin-right: 8px;
+      /* Space between icon and text */
+    }
+
+    .about-section {
+      background-color: #f3fafc;
+      display: flex;
+    }
+
+    .about-text h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #1a1a1a;
+    }
+
+    .about-text h2 {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .about-text p {
+      color: #888;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    .features-list {
+      color: #888;
+      font-size: 0.9rem;
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .features-list li::before {
+      color: #1ac079;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .contact-button {
+      background-color: #1ac079;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .contact-button:hover {
+      background-color: #17a066;
+      text-decoration: none;
+    }
+
+    .contact-button i {
+      margin-right: 8px;
+      /* Adjust spacing as needed */
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      background-color: #e0f7e9;
+      /* Initial light background for the icon */
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon svg {
+      fill: #17a066;
+      /* Initial color for the SVG icon */
+      /* transition: fill 0.3s ease; */
+    }
+
+
+    /* Card hover effect */
+    .feature-card:hover {
+      background-color:#1ac079;
+      /* Light green on hover */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      /* Slight shadow on hover */
+      color: white;
+    }
+
+    .feature-card:hover .text-muted,
+    .feature-card:hover .text-success {
+      color: white !important;
+    }
+
+    .feature-card:hover .icon {
+      background-color: #08c988;
+      /* Darker green for icon background on hover */
+    }
+
+            
+        .container-2 {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .image-section {
+            position: relative;
+            width: 50%;
+            background-image: url('https://jobstack-shreethemes.vercel.app/static/media/ab05.a7fa93ab5b124c959a1e.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+        }
+        .content-section {
+            width: 50%;
+            background-color: #1f9a8b;
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .content-section h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .content-section p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .content-section ul {
+            list-style: none;
+        }
+        .content-section ul li {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .content-section ul li i {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .faq-section {
+    background-color: #fff;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.faq-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    height: 150px;
+}
+ .icon {
+    font-size: 24px;
+    color:#1ac079;
+    margin-right: 10px;
+    float: left;
+}
+
+.faq-item h5 {
+    font-weight: bold;
+    margin: 0 0 10px 35px;
+    font-size: 1.1rem;
+}
+
+.faq-item p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 35px;
+}
+
+
+.job-banner {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-banner h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .job-banner p {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        
+        /* Background Icon Styling */
+        .background-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+        }
+        .background-icon-left {
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Text and button container to appear above the background icon */
+        .content-container {
+            z-index: 2;
+            margin-left: 20px;
+        }
+        .text-container a:hover{
+            text-decoration: underline;
+        }
+        
+        .footer-links h2,
+.footer-icon h2,
+.footer-contacts h2,.footer-download h2 {
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+.footer-links p,
+.footer-icon p,
+.footer-contacts p,
+.footer-download p {
+    color:  rgb(151, 156, 161);
+    
+}
+.footer-links a:hover,
+.footer-icon a:hover,
+.footer-contacts a:hover,
+.footer-download a:hover {
+       color:  rgb(151, 156, 161);
+    ; /* Change to your desired hover color */
+    text-decoration: underline; /* Optional for an underline effect */
+}
+.navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            font-weight: 549;
+            margin: 0 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #1ac079; /* Change this color to your desired hover color */
+        }
+        .navbar {
+  border-radius: 20px; /* Adjust the value for your design */
+}
+.btn-custom {
+            color:#1ac079 !important ;
+          border-color: #1ac079 !important;
+        }
+
+        .btn-custom:hover {
+            background-color: #1ac079 !important;
+            color: white !important;
+        }
+
+        .btn1:hover {
+    color:#1ac079 !important;
+    border-color:#1ac079 !important ;
+    background-color: white !important;
+}
+ .btn1{
+          background-color: #1ac079 !important;
+          color: white !important;
+        }
+        
+    </style>
+</head>
+<body>
+  <div th:replace="~{fragments/header::header}"></div>
+
+    <div>
+        <div class="image-container">
+            <div class="overlay"></div>
+            <div class="text-container">
+                <h1>About Us</h1>
+                <div class="breadcrumb">
+                    <a th:href="@{/}">Hire Tribe</a> &gt; About Us
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-5 ">
+        <div class="row ">
+          <div class="col-6 " >
+            <img th:src="@{/image/About.png}"  width="70%">
+          </div>
+          <div class="col-6">
+    
+            <h1 data-aos="fade-left">Millions of jobs.</h1>
+    
+            <h2 data-aos="fade-left">Find the one that's right for you.</h2>
+            <p data-aos="fade-left">Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over
+              30,000+ companies worldwide.</p>
+              <ul class="features-list">
+                <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Digital Marketing Solutions for Tomorrow</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Our Talented & Experienced Marketing Agency</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Create your own skin to match your brand</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Access exclusive tools to streamline your workflow</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Personalized Job Alerts Tailored to You</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Insights on Industry Salary Trends</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Build a Professional Resume in Minutes</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> 24/7 Support for Your Career Growth</li>
+            <li data-aos="fade-left"><i class="fas fa-check-circle"></i> Dedicated support for your career growth</li>
+
+              </ul>
+            </ul>
+            <a th:href="@{/ContactUs}" class="contact-button"><i class="fas fa-envelope"></i> Contact us</a>
+          </div>
+    
+        </div>
+      </div>
+    
+
+      <div class="container my-5">
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+          <h2>Here's why you'll love Hire Tribe</h2>
+          <p class="text-muted">Explore thousands of job openings tailored to you. Get insights into salary trends and read trusted reviews of leading companies worldwide.
+          </p>
+        </div>
+    
+        <!-- Features Grid -->
+        <div class="row">
+          <!-- Feature Card 1 -->
+          <div class="col-md-3">
+            <div class="card feature-card text-center p-4 border-0 shadow" data-aos="flip-right">
+              <div class="icon bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16"
+                  class=" text-[30px] text-emerald-600 group-hover:text-white" height="1em" width="1em"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z">
+                  </path>
+                </svg>
+              </div>
+              <h5 class="card-title">24/7 Support</h5>
+              <p class="card-text text-muted">Many desktop publishing now use and a search for job</p>
+              <a th:href="@{/TwentyFour}" class="text-success font-weight-medium">Read More →</a>
+            </div>
+          </div>
+    
+          <!-- Feature Card 2 -->
+          <div class="col-md-3">
+            <div class="card feature-card text-center p-4 border-0 shadow" data-aos="flip-right">
+              <div class="icon bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
+                  class=" text-[30px] text-emerald-600 group-hover:text-white" height="1em" width="1em"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M223.99908,224a32,32,0,1,0,32.00782,32A32.06431,32.06431,0,0,0,223.99908,224Zm214.172-96c-10.877-19.5-40.50979-50.75-116.27544-41.875C300.39168,34.875,267.63386,0,223.99908,0s-76.39066,34.875-97.89653,86.125C50.3369,77.375,20.706,108.5,9.82907,128-6.54984,157.375-5.17484,201.125,34.958,256-5.17484,310.875-6.54984,354.625,9.82907,384c29.13087,52.375,101.64652,43.625,116.27348,41.875C147.60842,477.125,180.36429,512,223.99908,512s76.3926-34.875,97.89652-86.125c14.62891,1.75,87.14456,10.5,116.27544-41.875C454.55,354.625,453.175,310.875,413.04017,256,453.175,201.125,454.55,157.375,438.171,128ZM63.33886,352c-4-7.25-.125-24.75,15.00391-48.25,6.87695,6.5,14.12891,12.875,21.88087,19.125,1.625,13.75,4,27.125,6.75,40.125C82.34472,363.875,67.09081,358.625,63.33886,352Zm36.88478-162.875c-7.752,6.25-15.00392,12.625-21.88087,19.125-15.12891-23.5-19.00392-41-15.00391-48.25,3.377-6.125,16.37891-11.5,37.88478-11.5,1.75,0,3.875.375,5.75.375C104.09864,162.25,101.84864,175.625,100.22364,189.125ZM223.99908,64c9.50195,0,22.25586,13.5,33.88282,37.25-11.252,3.75-22.50391,8-33.88282,12.875-11.377-4.875-22.62892-9.125-33.88283-12.875C201.74516,77.5,214.49712,64,223.99908,64Zm0,384c-9.502,0-22.25392-13.5-33.88283-37.25,11.25391-3.75,22.50587-8,33.88283-12.875C235.378,402.75,246.62994,407,257.8819,410.75,246.25494,434.5,233.501,448,223.99908,448Zm0-112a80,80,0,1,1,80-80A80.00023,80.00023,0,0,1,223.99908,336ZM384.6593,352c-3.625,6.625-19.00392,11.875-43.63479,11,2.752-13,5.127-26.375,6.752-40.125,7.75195-6.25,15.00391-12.625,21.87891-19.125C384.7843,327.25,388.6593,344.75,384.6593,352ZM369.65538,208.25c-6.875-6.5-14.127-12.875-21.87891-19.125-1.625-13.5-3.875-26.875-6.752-40.25,1.875,0,4.002-.375,5.752-.375,21.50391,0,34.50782,5.375,37.88283,11.5C388.6593,167.25,384.7843,184.75,369.65538,208.25Z">
+                  </path>
+                </svg>
+              </div>
+              <h5 class="card-title">Features</h5>
+              <p class="card-text text-muted">Many desktop publishing now use and a search for job</p>
+              <a th:href="@{/feature}" class="text-success font-weight-medium">Read More →</a>
+            </div>
+          </div>
+    
+          <!-- Feature Card 3 -->
+          <div class="col-md-3">
+            <div class="card feature-card text-center p-4 border-0 shadow" data-aos="flip-right"
+            >
+              <div class="icon bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="text-[30px] text-emerald-600 group-hover:text-white" height="1em" width="1em">
+                  <path d="M320 464c8.8 0 16-7.2 16-16l0-288-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0zM0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z"/>
+                </svg>
+                      
+              </div>
+              <h5 class="card-title">Resume Builder</h5>
+              <p class="card-text text-muted">Desktop publishing now use and a search for job</p>
+              <a th:href="@{/PageResumeBuilder}" class="text-success font-weight-medium">Read More →</a>
+            </div>
+          </div>
+    
+          <!-- Feature Card 4 -->
+          <div class="col-md-3">
+            <div class="card feature-card text-center p-4 border-0 shadow" data-aos="flip-right">
+              <div class="icon bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center mb-3">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024"
+                  class=" text-[30px] text-emerald-600 group-hover:text-white" height="1em" width="1em"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M742 318V184h86c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H196c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h86v134c0 81.5 42.4 153.2 106.4 194-64 40.8-106.4 112.5-106.4 194v134h-86c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h632c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-86V706c0-81.5-42.4-153.2-106.4-194 64-40.8 106.4-112.5 106.4-194zm-72 388v134H354V706c0-42.2 16.4-81.9 46.3-111.7C430.1 564.4 469.8 548 512 548s81.9 16.4 111.7 46.3C653.6 624.1 670 663.8 670 706zm0-388c0 42.2-16.4 81.9-46.3 111.7C593.9 459.6 554.2 476 512 476s-81.9-16.4-111.7-46.3A156.63 156.63 0 0 1 354 318V184h316v134z">
+                  </path>
+                </svg>
+              </div>
+              <h5 class="card-title">Tech & StartUp </h5>
+              <p class="card-text text-muted">Many desktop publishing now use and a search for job</p>
+              <a th:href="@{/TechStartUp}" class="text-success font-weight-medium">Read More →</a>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+        
+
+      <div class="container container-2 p-5" data-aos="zoom-out-up">
+        <div class="image-section">
+            <!-- <div class="play-button">
+                <i class="fas fa-play"></i>
+            </div> -->
+        </div>
+        <div class="content-section">
+            <h1>Get the job of your dreams quickly.</h1>
+            <p>Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Digital Marketing Solutions for Tomorrow</li>
+                <li><i class="fas fa-check-circle"></i> Our Talented & Experienced Marketing Agency</li>
+                <li><i class="fas fa-check-circle"></i> Create your own skin to match your brand</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="faq-section text-center py-5">
+        <div class="container">
+            <h2 class="section-title">Questions & Answers</h2>
+            <p class="section-subtitle">Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.</p>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 mb-4" data-aos="fade-right">
+                    <div class="faq-item">
+                        <i class="fas fa-question-circle icon"></i>
+                        <h5>How our Jobstack work?</h5>
+                        <p>Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 mb-4" data-aos="fade-left">
+                    <div class="faq-item">
+                        <i class="fas fa-question-circle icon"></i>
+                        <h5>What is the main process open account?</h5>
+                        <p>Words are random, the reader will not be distracted from making a neutral judgement on the visual impact.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 mb-4" data-aos="fade-right">
+                    <div class="faq-item">
+                        <i class="fas fa-question-circle icon"></i>
+                        <h5>How to make unlimited data entry?</h5>
+                        <p>Furthermore, it is advantageous when the dummy text is relatively realistic so that the layout impression of the final publication is not compromised.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 mb-4" data-aos="fade-left">
+                    <div class="faq-item">
+                        <i class="fas fa-question-circle icon" ></i>
+                        <h5>Is Jobstack safer to use with my account?</h5>
+                        <p>The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container mt-5 mb-5">
+        <div class="job-banner d-flex align-items-center row">
+            <div class="col-9">
+              <svg class="background-icon-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M21 8V7l-7-5-7 5v1h14zM21 10H3v9h18v-9zm-2 7H5v-7h14v7z"/>
+            </svg>
+    
+    
+            <div>
+                <h2>Explore a job now!</h2>
+                <p>Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000+ companies worldwide.</p>
+            </div>
+            </div>
+            <div class="col-3">
+              <div class="ms-auto d-flex text-center ">
+                <!-- <button class="btn apply me-2">Apply Now</button>
+                <button class="btn learn ms-2">Learn More</button> -->
+            </div>
+            <!-- SVG Icon as Background -->
+            <svg class="background-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 17.25V21h3.75l11.09-11.09-3.75-3.75L3 17.25zm2.92-2.92l7.59-7.59 3.75 3.75-7.59 7.59h-3.75v-3.75z"/>
+            </svg>
+
+            </div>
+
+           
+          </div>
+    </div>
+    <script th:src="@{https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.js}"></script>
+    <script>
+        AOS.init({
+    duration: 1000
+    });
+    </script>
+    
+    
+    
+    <div th:replace="~{fragments/footer::footer}"></div>
+    <div th:replace="~{fragments/fragment::commonLinks}"></div>
+  
+
+     
+</body>
+</html>

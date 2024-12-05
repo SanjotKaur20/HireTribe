@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    
+
+<head>
+    <title></title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>    
+  </style>
+</head>
+
+<body>
+<div th:fragment="footer">
+    <div class="row bg-dark p-5 ">
+
+            <div class="footer-icon col-3 pb-3">
+                <h2 style="color: white;"><img th:src="@{/image/bag-logo.png}" alt="Logo"   width="80px"> Hire Tribe</h2>
+                
+                        <p style="text-align: justify;color: rgb(151, 156, 161);margin-left: 20px;">Hire Tribe is a job portal that connects job seekers with employers, offering a platform for job listings, applications, and career development resources.</p>
+<a th:href="@{https://www.facebook.com/login/}" style="text-decoration: none;"><i class="bi bi-facebook" style="color: rgb(151, 156, 161); margin-left: 30px;"></i>
+</a>
+<a th:href="@{https://in.pinterest.com/}" style="text-decoration: none;"><i class="bi bi-pinterest" style="color: rgb(151, 156, 161); margin-left: 20px;"></i>
+</a>
+<a th:href="@{https://x.com/login}" style="text-decoration: none;"> <i class="bi bi-twitter" style="color: rgb(151, 156, 161); margin-left: 20px;"></i>
+</a>
+<a th:href="@{https://www.instagram.com/?hl=en}" style="text-decoration: none;"><i class="bi bi-instagram" style="color: rgb(151, 156, 161); margin-left: 20px;"></i>
+</a>
+
+                    </div>
+            <div class="col-3 footer-links  ps-5 ">
+                <h2>Useful Link</h2>
+                <a th:href="@{/AboutUs} " style="text-decoration:none ;"><p style="margin-top: 20px;"> About Us</p></a>
+                <a th:href="@{/TermService} " style="text-decoration:none ;"><p style="margin-top: 20px;"> Service</p></a>
+                <a href="#job " style="text-decoration:none ;"><p style="margin-top: 20px;"> Browse</p></a>
+                <a th:href="@{/register}" style="text-decoration:none ;"><p style="margin-top: 10px;"> Candidates</p></a>
+                <a th:href="@{/ContactUs}" style="text-decoration:none"><p style="margin-top: 10px;"> Contact Us</p></a>
+            </div>
+            <div class=" footer-download col-3  ">
+                <h2>Download</h2>
+                <a th:href="@{https://www.apple.com/in/app-store/}" style="text-decoration: none;"><p style="margin-top: 20px"><i class="bi bi-apple "></i> App Store</p></a>
+               <a th:href="@{https://play.google.com/store/games?hl=en}" style="text-decoration:none;"><p style="margin-top: 10px"><i class="bi bi-google-play"></i> Google Play</p>
+               </a>
+               <a th:href="@{https://apps.microsoft.com/home?hl=en-US&gl=US}" style="text-decoration:none ;"><p style="margin-top: 10px"><i class="bi bi-windows"></i> Windows</p>
+               </a>
+
+                
+            </div>
+            <div class=" footer-contacts col-3 ">
+                <h2>Contact</h2>
+                <p style="margin-top: 20px;"><i class="bi bi-telephone"></i>  (001)-91-708-8444 </p>
+                <p style="margin-top: 10px;"> <i class="bi bi-envelope"></i> hiretribe009@gmail.com</p>
+
+                <div style="display: flex; gap: 2px;">
+                    <form action="/newsletter/subscribe" method="post" style="display: flex; width: 100%;">
+                        <input type="email" name="email" class="form-control" placeholder="Your email address" style="flex: 1;" required>
+                        <button type="submit" style="background-color: #1ac079; color: white; width: 50px;" class="form-control">
+                            <i class="fas fa-paper-plane plane"></i>
+                        </button>
+                    </form>
+                    
+                                        </form>
+                </div>
+                                                                                
+                
+
+            </div>
+        </div>
+        <footer class="py-3 bg-dark text-light">
+        <div class="container text-center">
+            <p class="mb-0" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">© 2024 Hire Tribe. All rights reserved.</p>
+        </div>
+    </footer>
+    
+        
+    </div>
+
+    <script th:src="@{https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.js}"></script>
+    <script>
+        AOS.init({
+  duration: 1000
+});
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Applied Job Seekers</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color:#f1faf8;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #1ac079;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table th {
+            background-color: #1ac079;
+            color: white;
+            text-align: center;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-profile {
+            color: white;
+            background-color: #1ac079;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-transform: capitalize;
+        }
+
+        .btn-profile:hover {
+            background-color: #11ac69;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Applied Job Seekers 
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>Seeker Name</th>
+                            <th>Email</th>
+                            <th>Registration Date</th>
+                            <th>City</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="jobSeeker : ${applyList}">
+                            <td th:text="${jobSeeker.userId.firstName} + ' ' + ${jobSeeker.userId.lastName}"></td>
+                            <td th:text="${jobSeeker.userId.userId.email}"></td>
+                            <td th:text="${jobSeeker.userId.userId.registrationDate}"></td>
+                            <td th:text="${jobSeeker.userId.city}"></td>
+                            <td>
+                                <a th:href="@{/job-seeker-profile/{id}(id=${jobSeeker.userId.userAccountId})}" 
+                                   class="btn btn-profile">View Profile</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+                body{
+            background-color:  #f1faf8;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .navbar-nav .nav-link {
+            color: rgb(130, 131, 133);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: black;
+            /* text-decoration: underline; */
+        }
+        /* Specific color for Post New Job */
+        .sidebar {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 20px;
+            height: 650px;
+        }
+
+       
+        .navbar{
+            border-radius: 13px;
+            margin-top: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+       
+        .navbar-nav {
+            margin-left: 19%;
+        }
+
+        .navbar-nav {
+            flex-wrap: nowrap;
+        }
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            margin: 0 10px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #1ac079; /* Change this color to your desired hover color */
+        }
+       
+
+
+        .form-container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            height: 500px;
+        }
+
+        .form-section {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            /* background-color: #f9f9f9; */
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #1ac079;
+        }
+
+        .btn-add {
+            background-color: #1ac079;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background-color: #149c5b;
+        }
+
+        .btn-remove {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .btn-remove:hover {
+            background-color: #cc0000;
+        }
+        #previewModal .modal-dialog {
+    max-width: 600px; /* Set the desired width of the modal */
+    width: 90%; /* Optional: Make it responsive by using percentage */
+    margin: 0 auto; /* Center the modal */
+}
+
+        
+        
+    </style>
+</head>
+
+<body style="overflow: hidden;">
+    <div class="container-fluid">
+        <div class="row">
+             <div class="col-md-3 sidebar bg-dark text-light" style="overflow-y: auto;">
+                <!--<div class="account-settings">
+                    <div class="user-profile text-center mt-5 ">
+                        <div class="user-avatar rounded-circle"  sec:authorize="hasAuthority('Job Seeker')">
+                            <img th:src="@{/image/images.png}" height="90px" width="90px" alt="Profile Picture"
+                                class="profile-picture rounded-circle me-3 mb-3" th:if="${user.photosImagePath==null}">
+                            <img class="profile-picture rounded-circle me-3" height="90px" width="90px"
+                                th:if="${user.photosImagePath!=null}" th:src="@{${user?.photosImagePath}}" />
+                        </div>
+                        <div sec:authorize="hasAuthority('Job Seeker')">
+                        <h5 class="user-name mt-3"  th:if="${user.firstName!=null && user.lastName!=null}"
+                            th:text="${user.firstName+' '+user.lastName}" style="color: #65F7B9;">Yuki Maxwell</h5>
+                        <h6 class="user-email text-center" th:text="${user?.userId?.email}" style="color: #65F7B9;">yuki@Maxwell.com</h6>
+                        </div>
+                        <div class="about text-center mt-3">
+                            <div th:if="${user != null && user.firstName != null && user.lastName != null && user.city != null 
+                                    && user.state != null && user.country != null && profile.employmentType != null}">
+                                <h5 style="color: #65F7B9; text-align: left; margin-left: 10px;">ABOUT - <span th:if="${user.firstName!=null && user.lastName!=null}"
+                                    th:text="${user.firstName+' '+user.lastName}">Yuki Maxwell></h5>
+                                <p style="text-align: justify;padding: 10px;">
+                                    <span th:text="${user.firstName + ' ' + user.lastName}">John Doe</span>
+                                    is a job seeker based in
+                                    <span th:text="${user.city + ', ' + user.state + ', ' + user.country}">New York, NY,
+                                        USA</span>
+                                    currently seeking <span th:text="${profile.employmentType}">Full-Time</span>
+                                    opportunity.<span
+                                        th:if="${profile.skills != null and !profile.skills.isEmpty()}">They have
+                                        expertise in:
+                                        <ul  type="none">
+                                            <li  style="text-align: justify;" th:each="skill:${profile.skills}">
+                                                <span  th:text="${skill.name}" style="color: #65F7B9;">Skill Name</span> <br/>
+                                                years of experice -<span th:text="${skill.yearsOfExperience}">9</span> 
+                                               <br>
+                                                 level -<span th:text="${skill.experienceLevel}">Intermediate</span>
+                                                <hr/>
+                                            </li>
+                                            
+                                        </ul>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>-->
+            <!-- <a><img th:src="@{/image/linkedIn.png}" height="20px" width="20px"></a> -->
+            <a class="social-icon" href="https://www.facebook.com/login/"><i class="bi bi-facebook"></i></a>
+            <a class="social-icon" href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+            <a class="social-icon" href="https://x.com/"><i class="bi bi-twitter"></i></a>
+            <a class="social-icon" href="https://www.linkedIn.com/"><i class="bi bi-linkedin"></i></a>
+        </div> 
+
+
+
+
+
+        <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12">
+            <div th:replace="~{fragments/header1::header1}"></div>
+
+            <div class="form-container" style="overflow-y: auto;">
+                <h1 class="text-center mb-4">Resume Builder</h1>
+                <form action="/generate-resume" method="post">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <div class="section-title">Personal Information</div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone:</label>
+                                <input type="text" id="phone" name="phone" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jobTitle" class="form-label">Job Title:</label>
+                                <input type="text" id="jobTitle" name="jobTitle" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="address" class="form-label">Address:</label>
+                                <input type="text" id="address" name="address" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="city" class="form-label">City:</label>
+                                <input type="text" id="city" name="city" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Career Summary -->
+                    <div class="form-section">
+                        <div class="section-title">Career Summary</div>
+                        <textarea id="summary" name="summary" rows="4" class="form-control"
+                            placeholder="Brief overview of your career..." required></textarea>
+                    </div>
+
+                    <!-- Skills -->
+                    <!-- Skills -->
+                    <div class="form-section">
+                        <div class="section-title">Skills</div>
+                        <div id="skills-fields">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Skill Name:</label>
+                                    <input type="text" name="skillName[]" class="form-control" placeholder="e.g., Java"
+                                        required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Experience (Years):</label>
+                                    <input type="number" name="skillExperience[]" class="form-control"
+                                        placeholder="e.g., 3" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Experience Level:</label>
+                                    <select name="skillLevel[]" class="form-control" required>
+                                        <option value="" disabled selected>Select Level</option>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Advanced">Advanced</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-add" onclick="addSkillField()">+ Add Skill</button>
+                    </div>
+
+                    <!-- Projects -->
+                    <div class="form-section">
+                        <div class="section-title">Projects</div>
+                        <div id="projects-fields">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Project Name:</label>
+                                    <input type="text" name="projectName[]" class="form-control"
+                                        placeholder="e.g., Portfolio Website" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Time:</label>
+                                    <input type="text" name="projectTime[]" class="form-control"
+                                        placeholder="e.g., Jan 2023 - May 2023" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Description:</label>
+                                    <input type="text" name="projectDescription[]" class="form-control"
+                                        placeholder="e.g., Designed and developed a personal website" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-add" onclick="addProjectField()">+ Add Project</button>
+                    </div>
+
+
+                    <script>
+                        function addSkillField() {
+                            const skillsFields = document.getElementById("skills-fields");
+                            const newField = `
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <input type="text" name="skillName[]" class="form-control" placeholder="e.g., Java" required />
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="skillExperience[]" class="form-control" placeholder="e.g., 3" required />
+                </div>
+                <div class="col-md-4">
+                    <select name="skillLevel[]" class="form-control" required>
+                        <option value="" disabled selected>Select Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>`;
+                            skillsFields.insertAdjacentHTML("beforeend", newField);
+                        }
+
+                        function addProjectField() {
+                            const projectsFields = document.getElementById("projects-fields");
+                            const newField = `
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <input type="text" name="projectName[]" class="form-control" placeholder="e.g., Portfolio Website" required />
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="projectTime[]" class="form-control" placeholder="e.g., Jan 2023 - May 2023" required />
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="projectDescription[]" class="form-control" placeholder="e.g., Designed and developed a personal website" required />
+                </div>
+            </div>`;
+                            projectsFields.insertAdjacentHTML("beforeend", newField);
+                        }
+                    </script>
+
+
+
+                    <!-- Experience -->
+                    <div class="form-section">
+                        <div class="section-title">Experience</div>
+                        <div id="experience-fields">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Job Title:</label>
+                                    <input type="text" name="experienceTitle[]" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Duration:</label>
+                                    <input type="text" name="experienceDuration[]" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Description:</label>
+                                    <input type="text" name="experienceDescription[]" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-add" onclick="addExperienceField()">+ Add
+                            Experience</button>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="form-section">
+                        <div class="section-title">Education</div>
+                        <div id="education-fields">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">School/College Name:</label>
+                                    <input type="text" name="educationInstitution[]" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Year of Completion:</label>
+                                    <input type="text" name="educationYear[]" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Degree/Class:</label>
+                                    <input type="text" name="educationDegree[]" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="row mb-3 ">
+                                <div class="col-md-4">
+                                    <label class="form-label">Description:</label>
+                                    <input type="text" name="educationDescription[]" class="form-control" required />
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-add" onclick="addEducationField()">+ Add Education</button>
+                    </div>
+
+
+
+                    <script>
+                        function addExperienceField() {
+                            const experienceFields = document.getElementById("experience-fields");
+                            const newField = `
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <input type="text" name="experienceTitle[]" class="form-control" placeholder="e.g., Software Engineer" required />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="experienceDuration[]" class="form-control" placeholder="e.g., Jan 2020 - Dec 2022" required />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="experienceDescription[]" class="form-control" placeholder="e.g., Developed web apps..." required />
+                    </div>
+                </div>`;
+                            experienceFields.insertAdjacentHTML("beforeend", newField);
+                        }
+
+                        function addEducationField() {
+                            const educationFields = document.getElementById("education-fields");
+                            const newField = `
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <input type="text" name="educationInstitution[]" class="form-control" placeholder="e.g., XYZ University" required />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="educationYear[]" class="form-control" placeholder="e.g., 2022" required />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="educationDegree[]" class="form-control" placeholder="e.g., B.Tech" required />
+                    </div>
+                        <div class="col-md-4 mt-3">
+                        <input type="text" name="educationDescription[]" class="form-control" placeholder="e.g., I learnt ..." required />
+                    </div>
+
+                </div>`;
+                            educationFields.insertAdjacentHTML("beforeend", newField);
+                        }
+                    </script>
+
+<div class="form-section container">
+    <div class="section-title text-center mb-4">Select Templates</div>
+    <div class="row justify-content-center">
+
+        <!-- Template 1 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="template-card text-center">
+                <img class="p-2 img-fluid" th:src="@{/image/Resume1.jpg}" style="max-height: 200px; max-width: 100%;" />
+                <div class="icon-group mt-2">
+                    <i class="bi bi-eye-fill p-2" title="Preview Template" onclick="previewTemplate('/image/Resume1.jpg')"></i>
+                    <i class="bi bi-download p-2 d-none" id="download-icon-1" title="Download Template" onclick="chooseTemplate(1)"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 2 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="template-card text-center">
+                <img class="p-2 img-fluid" th:src="@{/image/Resume2.jpg}" style="max-height: 200px; max-width: 100%;" />
+                <div class="icon-group mt-2">
+                    <i class="bi bi-eye-fill p-2" title="Preview Template" onclick="previewTemplate('/image/Resume2.jpg')"></i>
+                    <i class="bi bi-download p-2 d-none" id="download-icon-2" title="Download Template" onclick="chooseTemplate(2)"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 3 -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="template-card text-center">
+                <img class="p-2 img-fluid" th:src="@{/image/Resume3.jpg}" style="max-height: 200px; max-width: 100%;" />
+                <div class="icon-group mt-2">
+                    <i class="bi bi-eye-fill p-2" title="Preview Template" onclick="previewTemplate('/image/Resume3.jpg')"></i>
+                    <i class="bi bi-download p-2 d-none" id="download-icon-3" title="Download Template" onclick="chooseTemplate(3)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">Template Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="previewImage" src="" alt="Template Preview" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+    
+<script>
+    function checkFormFields() {
+        // Check if all required fields in the form are filled
+        const form = document.querySelector("form");
+        const requiredFields = form.querySelectorAll("[required]");
+        return Array.from(requiredFields).every(field => field.value.trim() !== "");
+    }
+
+    function updateDownloadIcons() {
+        // Toggle visibility of download icons based on form validation
+        for (let i = 1; i <= 3; i++) {
+            const downloadIcon = document.getElementById(`download-icon-${i}`);
+            if (checkFormFields()) {
+                downloadIcon.classList.remove("d-none");
+            } else {
+                downloadIcon.classList.add("d-none");
+            }
+        }
+    }
+
+    // Listen for changes in the form fields to update the icons
+    document.querySelectorAll("form [required]").forEach(field => {
+        field.addEventListener("input", updateDownloadIcons);
+    });
+
+    function chooseTemplate(templateId) {
+        const formData = new FormData(document.querySelector("form"));
+        formData.append("templateId", templateId);
+
+        fetch("/generate-resume", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error("Failed to generate resume");
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "resume.pdf";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch(error => console.error(error));
+    }
+
+    function previewTemplate(imageUrl) {
+    // Set the image URL in the modal
+    const previewImage = document.getElementById("previewImage");
+    previewImage.src = imageUrl;
+
+    // Show the Bootstrap modal
+    const previewModal = new bootstrap.Modal(document.getElementById("previewModal"));
+    previewModal.show();
+}
+</script>
+
+                    <!-- <button type="submit" class="btn btn-primary w-100">Generate Resume</button> -->
+                    </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
