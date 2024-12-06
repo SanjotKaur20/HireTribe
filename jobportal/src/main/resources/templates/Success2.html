@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .status-card {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .status-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .success-icon-wrapper {
+            background-color: #d4edda; /* Light green background */
+        }
+        .error-icon-wrapper {
+            background-color: #f8d7da; /* Light red background */
+        }
+        .status-icon {
+            font-size: 2.5rem;
+            color: white;
+        }
+        .success-icon {
+            color: #28a745; /* Green for success */
+        }
+        .error-icon {
+            color: #dc3545; /* Red for error */
+        }
+        .status-message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        // Redirect after a few seconds
+        window.addEventListener('DOMContentLoaded', (event) => {
+			const isSuccess = /*[[${successMessage != null}]]*/ false;
+
+			// Define the redirect URLs
+			const redirectUrl = isSuccess ?  "/recruiter_profile/":"/dashboard/" ;
+            setTimeout(() => {
+                window.location.href = redirectUrl;
+            }, 3000); // 3000 ms = 3 seconds
+        });
+    </script>
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+
+    <div th:if="${successMessage}" class="status-card bg-white text-center">
+        <div class="status-icon-wrapper success-icon-wrapper">
+            <div class="status-icon">&#x2714;</div> <!-- Check icon for success -->
+        </div>
+        <div class="status-message">Success</div>
+        <p class="status-description" th:text="${successMessage}">Your form was submitted successfully!</p>
+    </div>
+
+    <div th:if="${errorMessage}" class="status-card bg-white text-center">
+        <div class="status-icon-wrapper error-icon-wrapper">
+            <div class="status-icon">&#x2716;</div> <!-- Cross icon for error -->
+        </div>
+        <div class="status-message">Error</div>
+        <p class="status-description" th:text="${errorMessage}">There was an issue with your submission.</p>
+    </div>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

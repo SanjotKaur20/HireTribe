@@ -157,14 +157,14 @@ hr{
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
                                         <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                               th:field="*{firstName}" class="form-control" />
+                                               th:field="*{firstName}" class="form-control"  required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lastName">Last Name</label>
                                         <input type="text" id="lastName" name="lastName" placeholder="Last Name"
-                                               th:field="*{lastName}" class="form-control" />
+                                               th:field="*{lastName}" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
@@ -174,14 +174,14 @@ hr{
                                     <div class="form-group">
                                         <label for="city">City</label>
                                         <input type="text" id="city" name="city" placeholder="City" th:field="*{city}"
-                                               class="form-control" />
+                                               class="form-control" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="state">State</label>
                                         <input type="text" id="state" name="state" placeholder="State" th:field="*{state}"
-                                               class="form-control" />
+                                               class="form-control" required />
                                     </div>
                                 </div>
                             </div>
@@ -191,14 +191,14 @@ hr{
                                     <div class="form-group">
                                         <label for="country">Country</label>
                                         <input type="text" id="country" name="country" placeholder="Country"
-                                               th:field="*{country}" class="form-control" />
+                                               th:field="*{country}" class="form-control" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="company">Company</label>
                                         <input type="text" id="company" name="company" th:field="*{company}"
-                                               class="form-control" placeholder="Company" />
+                                               class="form-control" placeholder="Company" required />
                                     </div>
                                 </div>
                             </div>

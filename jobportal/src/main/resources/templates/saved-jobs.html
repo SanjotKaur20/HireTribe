@@ -103,12 +103,12 @@
                     <div class="account-settings">
                         <div class="user-profile text-center">
                             <div class="user-avatar rounded-circle">
-                                <img th:src="@{https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqr-b4K3tFcRRXLxOuYKOx9kNcWgV80RiaeA&s}"
-                                height="90px" width="90px"     alt="Profile Picture" class="profile-picture rounded-circle me-3 mb-3" th:if="${user.photosImagePath==null}">
+                                <img th:src="@{https://cdn-icons-png.flaticon.com/512/7077/7077313.png}"
+                                height="90px" width="90px"      alt="Profile Image" class="profile-img" th:if="${user.photosImagePath==null}">
                                 <img class="profile-picture rounded-circle me-3 mb-3" height="90px"
                                 width="90px" th:if="${user.photosImagePath!=null}" th:src="@{${user?.photosImagePath}}" />
                             </div>
-                            <h5 class="user-name mt-3" th:if="${user.firstName!=null && user.lastName!=null}"
+                                <h5 class="user-name mt-3" th:if="${user.firstName!=null && user.lastName!=null}"
                                 th:text="${user.firstName+' '+user.lastName}" style="color: #65F7B9;">Yuki Maxwell</h5>
                                 <h6 class="user-email text-center" th:text="${user?.userId?.email}" style="color: #65F7B9;">yuki@Maxwell.com</h6>
                             </div>

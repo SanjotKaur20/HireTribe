@@ -270,7 +270,7 @@
     </div>
 
         
-    <div class="container mt-3 p-4" style="overflow-y: auto; max-height: 400px;">
+    <div class="container mt-3 p-4" style="overflow-y: auto; max-height: 450px;">
 
     <!-- Job Details Section -->
         <div class="card mt-1 p-5">
@@ -307,23 +307,25 @@
             </div>
 
             <!-- Job Description -->
-             <div class=" row">
+            <div class="row d-flex">
+                <!-- Column 1: Job Description -->
                 <div class="col-9">
                     <h3 class="mt-4">Job Description</h3>
                     <p th:utext="${jobDetails.descriptionOfJob}">Something something...</p>
-                    
                 </div>
-                <div class="col-3 mt-5  bg-dark text-light text-center " style="border-radius: 20px;" sec:authorize="hasAuthority('Recruiter')">
-                    <label class="mt-3 mb-3"> Candidates Applied for Job</label>
+            
+                <!-- Column 2: Candidates Applied for Job -->
+                <div class="col-3 mt-5 bg-dark text-light text-center" style="border-radius: 20px; height: 10%;" sec:authorize="hasAuthority('Recruiter')">
+                    <label class="mt-3 mb-3">Candidates Applied for Job</label>
                     <!-- <th:block th:each="applyList:${applyList}">
-                        <a style="text-decoration: none; color: white;" th:href="@{/job-seeker-profile/{id}(id=${applyList.userId.userAccountId})}" class="white" 
-                        th:text="${applyList.userId.firstName+' '+applyList.userId.lastName}" >First Name  LastName</a>
+                        <a style="text-decoration: none; color: white;" th:href="@{/job-seeker-profile/{id}(id=${applyList.userId.userAccountId})}" class="white"
+                            th:text="${applyList.userId.firstName+' '+applyList.userId.lastName}" >First Name LastName</a>
                         <br>
                     </th:block> -->
-                    <a th:href="@{/job-applied-seekers/{jobId}(jobId=${jobDetails.jobPostId})}" class="btn  mb-3" style="background-color: #1ac079;"> Applied  Job Seeker</a>
-
+                    <a th:href="@{/job-applied-seekers/{jobId}(jobId=${jobDetails.jobPostId})}" class="btn mb-3" style="background-color: #1ac079;">Applied Job Seeker</a>
                 </div>
-
+            </div>
+            
             <!-- Action Buttons -->
             <div class="d-flex justify-content-start">
                 <form th:action="@{/dashboard/edit/{id}(id=${jobDetails.jobPostId})}" method="post"  >
